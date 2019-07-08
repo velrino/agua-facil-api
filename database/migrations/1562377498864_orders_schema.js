@@ -6,9 +6,9 @@ const Schema = use('Schema')
 class OrdersSchema extends Schema {
   up () {
     this.create('orders', (table) => {
-      table.uuid('order_id');
+      table.uuid('id');
       table.uuid('company_place_id')
-        .references('company_place_id')
+        .references('id')
         .inTable('companies_places')
         .onUpdate('CASCADE')
         .onDelete('CASCADE');

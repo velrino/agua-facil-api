@@ -6,7 +6,7 @@ const Schema = use('Schema')
 class CompaniesSchema extends Schema {
   up () {
     this.create('companies', (table) => {
-      table.uuid('company_id').primary();
+      table.uuid('id').primary();
       table.string('document', 20).unique();
       table.integer('status', 2).defaultTo(1);
       table.json('data');

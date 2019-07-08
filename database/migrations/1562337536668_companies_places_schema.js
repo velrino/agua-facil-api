@@ -3,12 +3,12 @@
 /** @type {import('@adonisjs/lucid/src/Schema')} */
 const Schema = use('Schema')
 
-class CompaniesPlacesSchema extends Schema {
+class CompanyPlaceSchema extends Schema {
   up() {
     this.create('companies_places', (table) => {
-      table.uuid('company_place_id').primary();
+      table.uuid('id').primary();
       table.uuid('company_id')
-        .references('company_id')
+        .references('id')
         .inTable('companies')
         .onUpdate('CASCADE')
         .onDelete('CASCADE');
@@ -23,4 +23,4 @@ class CompaniesPlacesSchema extends Schema {
   }
 }
 
-module.exports = CompaniesPlacesSchema
+module.exports = CompanyPlaceSchema

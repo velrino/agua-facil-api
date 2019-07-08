@@ -6,7 +6,7 @@ const Schema = use('Schema')
 class FeedbacksSchema extends Schema {
   up () {
     this.create('feedbacks', (table) => {
-      table.uuid('feedback_id').primary();
+      table.uuid('id').primary();
       table.uuid('origin_id');
       table.integer('status', 2).defaultTo(1);
       table.string('type', 10).defaultTo('order');
