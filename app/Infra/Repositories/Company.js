@@ -10,11 +10,11 @@ class CompanyRepository extends DefaultRepository {
 
     async getWhereRawJsonExtract() {
         const query = [
-            this.rawJsonExtract('testCarai', 4, '<'),
-            this.rawJsonExtract('testCarai', 1)
+            this.rawJsonExtract('POMPUP', 'lorem'),
+            this.rawJsonExtract('testCarai', 4)
         ];
 
-        return await this.queryWhereRaw(Company, query).paginate(1, 10);
+        return await this.queryWhereRaw(Company.query(), query, 'whereRaw').paginate(1, 10);
     }
 }
 
