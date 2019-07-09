@@ -8,8 +8,9 @@ class DefaultRepository extends Model {
         return Database.raw(`JSON_CONTAINS(${column}, '${value}', '$.${index}') IN (?)`, [value]);
     }
 
-    rawJsonExtract(index, value, column = "data") {
-        return Database.raw(`LOWER(JSON_EXTRACT(${column}, "$.${index}"))  LIKE ?`, [`%${value}%`]);
+    rawJsonExtract(index, value, type = 'LIKE', column = "data") {
+        const newValue = (type == 'LIKE') ? `%${value}%` : value;
+        return Database.raw(`LOWER(JSON_EXTRACT(${column}, "$.${index}")) ${type}  ?`, [newValue]);
     }
 
     queryWhereRaw(model, raws = []) {
