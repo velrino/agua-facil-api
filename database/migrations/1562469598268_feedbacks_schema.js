@@ -4,18 +4,23 @@
 const Schema = use('Schema')
 
 class FeedbacksSchema extends Schema {
-  up () {
-    this.create('feedbacks', (table) => {
+  up() {
+    this.create('feedbacks_orders', (table) => {
       table.uuid('id').primary();
-      table.uuid('origin_id');
+      table.uuid('order_id')
+        .references('id')
+        .inTable('orders')
+        .onUpdate('CASCADE')
+        .onDelete('CASCADE');
       table.integer('status', 2).defaultTo(1);
       table.string('type', 10).defaultTo('order');
+      table.integer('rating', 1).defaultTo(1).notNullable();
       table.json('data');
       table.timestamps()
     })
   }
 
-  down () {
+  down() {
     this.drop('feedbacks')
   }
 }

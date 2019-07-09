@@ -7,8 +7,8 @@ class CompaniesSchema extends Schema {
   up () {
     this.create('companies', (table) => {
       table.uuid('id').primary();
-      table.string('document', 20).unique();
-      table.integer('status', 2).defaultTo(1);
+      table.string('document', 20).unique().notNullable();
+      table.integer('status', 2).defaultTo(1).notNullable();
       table.json('data');
       table.timestamps();
     })
