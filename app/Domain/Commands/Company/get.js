@@ -9,7 +9,7 @@ class GetCompanyCommand extends DefaultCommand {
     const queries = request.qs;
     let queriesDatas = this.getDatasQueries(queries);
 
-    let data = new CompanyRepository().getWhereRawJsonExtract(); 
+    let data = new CompanyRepository().getWhereRawJsonExtract(queries); 
     return data
   }
 }
