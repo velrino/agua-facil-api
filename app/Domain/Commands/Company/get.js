@@ -7,7 +7,6 @@ class GetCompanyCommand extends DefaultCommand {
 
   async execute({ request }) {
     const queries = request.qs;
-    let queriesDatas = this.getDatasQueries(queries);
 
     let data = new CompanyRepository().getWhereRawJsonExtract(queries); 
     return data

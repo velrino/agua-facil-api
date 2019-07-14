@@ -7,9 +7,8 @@ class SearchCompanyPlaceCommand extends DefaultCommand {
 
   async execute({ request }) {
     const queries = request.qs;
-    let queriesDatas = this.getDatasQueries(queries);
-
     let data = new CompanyPlaceRepository().getWhereRawJsonExtract(queries); 
+    
     return data
   }
 }
