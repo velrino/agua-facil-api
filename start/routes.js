@@ -19,6 +19,11 @@ const Route = use('Route')
 Route.group(() => {
   Route.get('/companies', 'App/Domain/Commands/Company/get.execute')
   Route.post('/companies', 'App/Domain/Commands/Company/create.execute')
+  
   Route.post('/places', 'App/Domain/Commands/CompanyPlace/create.execute')
   Route.get('/places/search', 'App/Domain/Commands/CompanyPlace/search.execute')
+
+  Route.get('/order/:id', 'App/Domain/Commands/Orders/get.execute')
+  Route.post('/order', 'App/Domain/Commands/Orders/create.execute')
+  Route.patch('/order/:id/:status', 'App/Domain/Commands/Orders/increment.execute')
 }).prefix('api')
