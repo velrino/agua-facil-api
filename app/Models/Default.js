@@ -11,7 +11,7 @@ class Default extends Model {
         super.boot();
         /* Before create new record. */
         this.addHook('beforeCreate', async (modelInstance) => {
-            modelInstance.id = uuid.v4();
+            modelInstance.id = (modelInstance.id == null) ? uuid.v4() : modelInstance.id;
         });
         /* Before creating or updating a new record. */
         this.addHook('beforeSave', async (modelInstance) => {
@@ -25,7 +25,7 @@ class Default extends Model {
             console.log(modelInstance);
             modelInstance.for
             //modelInstance.data = JSON.parse(modelInstance.data);
-        })        
+        })
     }
 
     static handleColumnDataOnSave(modelInstance) {

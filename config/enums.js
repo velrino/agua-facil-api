@@ -7,23 +7,35 @@ const ENUMS = {
         user: 2,
     },
     orderStatus: {
-        accepted: 2,
-        canceled: 6,
-        completed: 5,
-        delivery: 4,
-        expired: 7,
-        loading: 3,
-        pending: 1,
+        accepted: {
+            text: 'Aceito',
+            id: 2,
+        },
+        canceled: {
+            text: 'Cancelado',
+            id: 6,
+        },
+        completed: {
+            text: 'Concluído',
+            id: 5,
+        },
+        delivery: {
+            text: 'A caminho da entrega',
+            id: 4,
+        },
+        expired: {
+            text: 'Expirado',
+            id: 7,
+        },
+        loading: {
+            text: 'Carregando',
+            id: 3,
+        },
+        pending: {
+            text: 'Pendente',
+            id: 1,
+        },
     },
-    orderStatus: {
-        acive: 1,
-        canceled: 6,
-        completed: 5,
-        delivery: 4,
-        expired: 7,
-        loading: 3,
-        pending: 1,
-    }
 }
 
 module.exports = ENUMS

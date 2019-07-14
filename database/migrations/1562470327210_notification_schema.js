@@ -4,11 +4,16 @@
 const Schema = use('Schema')
 
 class NotificationSchema extends Schema {
-  up () {
+  up() {
     this.create('notifications', (table) => {
       table.uuid('id').primary();
       table.uuid('origin_id');
-      table.integer('status', 2).defaultTo(1);
+      table.integer('status_id', 2).unsigned().notNullable().defaultTo(1);
+      table.foreign('status_id')
+        .references('id')
+        .inTable('status')
+        .onUpdate('CASCADE')
+        .onDelete('CASCADE');
       table.string('type', 10).defaultTo('order');
       table.boolean('visualized').defaultTo(false);
       table.boolean('send_email').defaultTo(false);
@@ -18,7 +23,7 @@ class NotificationSchema extends Schema {
     })
   }
 
-  down () {
+  down() {
     this.drop('notifications')
   }
 }

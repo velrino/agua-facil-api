@@ -1,9 +1,12 @@
 'use strict'
 
-/** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
-const Model = use('Model')
+const Default = use('./Default')
 
-class CompanyPlace extends Model {
+class CompanyPlace extends Default {
+    static get table() {
+        return 'companies_places'
+    }
+
     company() {
         return this.belongsTo('App/Models/Company');
     }

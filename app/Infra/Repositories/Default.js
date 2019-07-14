@@ -10,7 +10,7 @@ class DefaultRepository extends Model {
 
     rawJsonExtract(index, value, type = 'LIKE', column = "data") {
         const newValue = (type == 'LIKE') ? `%${value}%` : value;
-        return Database.raw(`LOWER(JSON_EXTRACT(${column}, "$.${index}")) ${type} ?`, [newValue]);
+        return Database.raw(`LOWER(JSON_EXTRACT(${column}, "$.${index}")) ${type} ?`, [newValue.toLowerCase()]);
     }
 
     queryWhereRaw(query, raws = [], method = 'orWhereRaw') {

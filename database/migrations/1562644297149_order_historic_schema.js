@@ -12,10 +12,10 @@ class OrderHistoricSchema extends Schema {
         .inTable('orders')
         .onUpdate('CASCADE')
         .onDelete('CASCADE');
-      table.integer('historic_id').unsigned().notNullable();
-      table.foreign('historic_id')
+      table.integer('status_id', 2).unsigned().notNullable().defaultTo(1);
+      table.foreign('status_id')
         .references('id')
-        .inTable('historics')
+        .inTable('status')
         .onUpdate('CASCADE')
         .onDelete('CASCADE');
       table.timestamps()

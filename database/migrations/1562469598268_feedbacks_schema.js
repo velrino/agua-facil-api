@@ -12,7 +12,12 @@ class FeedbacksSchema extends Schema {
         .inTable('orders')
         .onUpdate('CASCADE')
         .onDelete('CASCADE');
-      table.integer('status', 2).defaultTo(1);
+      table.integer('status_id', 2).unsigned().notNullable().defaultTo(1);
+      table.foreign('status_id')
+        .references('id')
+        .inTable('status')
+        .onUpdate('CASCADE')
+        .onDelete('CASCADE');
       table.string('type', 10).defaultTo('order');
       table.integer('rating', 1).defaultTo(1).notNullable();
       table.json('data');
@@ -21,7 +26,7 @@ class FeedbacksSchema extends Schema {
   }
 
   down() {
-    this.drop('feedbacks')
+    this.drop('feedbacks_orders')
   }
 }
 

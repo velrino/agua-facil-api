@@ -4,7 +4,7 @@
 const Schema = use('Schema')
 
 class OrdersSchema extends Schema {
-  up () {
+  up() {
     this.create('orders', (table) => {
       table.uuid('id').primary();
       table.uuid('company_place_id')
@@ -12,13 +12,18 @@ class OrdersSchema extends Schema {
         .inTable('companies_places')
         .onUpdate('CASCADE')
         .onDelete('CASCADE');
-      table.integer('status', 2).defaultTo(1);
+      table.integer('status_id', 2).unsigned().notNullable().defaultTo(1);
+      table.foreign('status_id')
+        .references('id')
+        .inTable('status')
+        .onUpdate('CASCADE')
+        .onDelete('CASCADE');
       table.json('data');
       table.timestamps()
     })
   }
 
-  down () {
+  down() {
     this.drop('orders')
   }
 }
