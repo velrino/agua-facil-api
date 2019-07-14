@@ -20,14 +20,15 @@ class Default extends Model {
             modelInstance.id = await params.id
             await delete params.id
             params.id = await uuid.v4();
+            modelInstance.data = JSON.parse(modelInstance.data);
         })
         /* Before creating or updating a new record. */
         this.addHook('beforeSave', async (modelInstance) => {
             modelInstance.data = this.handleColumnDataOnSave(modelInstance);
         })
         /* After a single record is fetched from the database. */
-        this.addHook('afterFind', async (modelInstance) => {
-            modelInstance.data = JSON.parse(modelInstance.data);
+        this.addHook('afterPaginate', async (modelInstance) => {
+            modelInstance.data = this._afterFetch(modelInstance);
         })
     }
 
@@ -36,6 +37,14 @@ class Default extends Model {
         const newData = (!lodash.isEmpty(originalData)) ? Object.assign(JSON.parse(originalData), modelInstance.data) : modelInstance.data;
 
         return JSON.stringify(newData);
+    }
+
+    static _afterFetch(instances, field = 'data') {
+        for (let instance of instances) {
+            if (instance[field] && typeof instance[field] === 'string') {
+                instance[field] = JSON.parse(instance[field])
+            }
+        }
     }
 }
 
