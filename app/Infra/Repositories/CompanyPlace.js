@@ -2,6 +2,7 @@
 
 const DefaultRepository = use('./Default');
 const CompanyPlace = use('App/Models/CompanyPlace');
+const MapsService = use('App/Infra/Services/Maps');
 
 class CompanyPlaceRepository extends DefaultRepository {
     async create(params) {
@@ -12,10 +13,17 @@ class CompanyPlaceRepository extends DefaultRepository {
         return await CompanyPlace.query().paginate(1, 10);
     }
 
+    queryNearby(startQuery, lat, lng, distance = 1) {
+        const { minLat, maxLat, minLng, maxLng } = this.getNearby(lat, lng, distance);
+        return startQuery.whereBetween('latitude', [minLat, maxLat])
+            .whereBetween('longitude', [minLng, maxLng])
+    }
+
     async getWhereRawJsonExtract(params = {}) {
         let startQuery = CompanyPlace.query().with('company')
 
         const have = {
+            address: params.hasOwnProperty('address'),
             itens: params.hasOwnProperty('itens'),
             location: (params.hasOwnProperty('lat') && params.hasOwnProperty('lng') && params.hasOwnProperty('distance')),
             order: params.hasOwnProperty('order'),
@@ -34,11 +42,12 @@ class CompanyPlaceRepository extends DefaultRepository {
             query = this.whereByJson(params['payment'].split(","), 'payment');
         if (have.period)
             query = this.whereByJson(params['period'].split(","), 'period');
-        if (have.location) {
-            const { minLat, maxLat, minLng, maxLng } = this.getNearby(params['lat'], params['lng'], params['distance']);
-            startQuery
-                .whereBetween('latitude', [minLat, maxLat])
-                .whereBetween('longitude', [minLng, maxLng])
+        if (have.address) {
+            const maps = await new MapsService().getLocationByAddres(params['address']);
+            const { lat, lng } = maps.geometry.location;
+            startQuery = this.queryNearby(startQuery, lat, lng, params['distance'])
+        } else if (have.location) {
+            startQuery = this.queryNearby(startQuery, params['lat'], params['lng'], params['distance'])
         }
 
         return await this.queryWhereRaw(startQuery, query)
