@@ -27,6 +27,10 @@ class Default extends Model {
             modelInstance.data = this.handleColumnDataOnSave(modelInstance);
         })
         /* After a single record is fetched from the database. */
+        this.addHook('afterFind', async (modelInstance) => {
+            modelInstance.data = JSON.parse(modelInstance.data);
+        })
+        /* After a single record is fetched from the database. */
         this.addHook('afterPaginate', async (modelInstance) => {
             modelInstance.data = this._afterFetch(modelInstance);
         })
