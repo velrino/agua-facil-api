@@ -4,6 +4,10 @@ const DefaultRepository = use('./Default');
 const Company = use('App/Models/Company');
 
 class CompanyRepository extends DefaultRepository {
+    async store(params) {
+        return await Company.create(params);
+    }
+
     async get() {
         return await Company.query().paginate(1, 10);
     }

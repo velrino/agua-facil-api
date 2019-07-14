@@ -18,5 +18,6 @@ const Route = use('Route')
 
 Route.group(() => {
   Route.get('/companies', 'App/Domain/Commands/Company/get.execute')
+  Route.post('/companies', 'App/Domain/Commands/Company/create.execute')
   Route.get('/places/search', 'App/Domain/Commands/CompanyPlace/search.execute')
 }).prefix('api')

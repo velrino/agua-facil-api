@@ -7,12 +7,20 @@ const lodash = require('lodash');
 
 class Default extends Model {
     static boot() {
-        const self = this;
+        const params = {
+            id: uuid.v4()
+        }
         super.boot();
         /* Before create new record. */
         this.addHook('beforeCreate', async (modelInstance) => {
-            modelInstance.id = (modelInstance.id == null) ? uuid.v4() : modelInstance.id;
+            modelInstance.id = (modelInstance.id == null) ? params.id : modelInstance.id;
         });
+        /* After create new record. */
+        this.addHook('afterCreate', async (modelInstance) => {
+            modelInstance.id = await params.id
+            await delete params.id
+            params.id = await uuid.v4();
+        })
         /* Before creating or updating a new record. */
         this.addHook('beforeSave', async (modelInstance) => {
             modelInstance.data = this.handleColumnDataOnSave(modelInstance);
@@ -20,11 +28,6 @@ class Default extends Model {
         /* After a single record is fetched from the database. */
         this.addHook('afterFind', async (modelInstance) => {
             modelInstance.data = JSON.parse(modelInstance.data);
-        })
-        this.addHook('afterFetch', async (modelInstance) => {
-            console.log(modelInstance);
-            modelInstance.for
-            //modelInstance.data = JSON.parse(modelInstance.data);
         })
     }
 
