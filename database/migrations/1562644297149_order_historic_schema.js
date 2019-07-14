@@ -18,6 +18,7 @@ class OrderHistoricSchema extends Schema {
         .inTable('status')
         .onUpdate('CASCADE')
         .onDelete('CASCADE');
+      table.json('data').nullable();
       table.timestamps()
     })
   }

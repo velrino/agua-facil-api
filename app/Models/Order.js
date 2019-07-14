@@ -1,9 +1,11 @@
 'use strict'
 
-/** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
-const Model = use('Model')
+const Default = use('./Default')
 
-class Order extends Model {
+class Order extends Default {
+    historic() {
+        return this.hasMany('App/Models/OrderHistoric').orderBy('status_id', 'ASC');
+    }
 }
 
 module.exports = Order
