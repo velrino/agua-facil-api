@@ -4,17 +4,13 @@ const Env = use('Env')
 
 class MailService {
 
-    async sendMail(email, subject = null, params = null, layout = 'emails.welcome') {
-        const data = request.only(['email'])
-
-        await Mail.send(layout, params, (message) => {
+    async sendMail(email, subject = null, params = {}, layout = 'emails.welcome') {
+        return await Mail.send(layout, params, (message) => {
             message
                 .to(email)
                 .from(Env.get('MAIL_FROM'))
                 .subject(subject)
         })
-
-        return 'Registered successfully'
     }
 }
 

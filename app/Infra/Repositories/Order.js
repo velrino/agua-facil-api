@@ -2,6 +2,7 @@
 
 const DefaultRepository = use('./Default');
 const Order = use('App/Models/Order');
+const CompanyPlace = use('App/Models/CompanyPlace');
 const OrderHistoric = use('App/Models/OrderHistoric');
 
 class OrderRepository extends DefaultRepository {
@@ -12,7 +13,13 @@ class OrderRepository extends DefaultRepository {
     }
 
     async get(id) {
-        return await Order.query().where('id', id).with('historic').first();
+        return await Order.query().where('id', id)
+            .with('status')
+            .with('companyPlace')
+            .with('historic', (query) => {
+                query.with('status');
+            })
+            .first();
     }
 
     async getLastHistoric(id) {
@@ -25,6 +32,23 @@ class OrderRepository extends DefaultRepository {
 
     async createHistoric(order_id, status_id) {
         return await OrderHistoric.create({ order_id, status_id, data: {} });
+    }
+
+    async getCompany(id, params) {
+        const companyPlaces = await CompanyPlace.query().select('id').where('company_id', id).pluck('id');
+
+        return await Order.query()
+            .whereIn('company_place_id', companyPlaces)
+            .with('status')
+            .with('companyPlace')
+            .paginate(params.page, params.limit);
+    }
+
+    async updateOrderStatus(id, status_id) {
+        return await Order
+            .query()
+            .where('id', id)
+            .update({ status_id })
     }
 }
 

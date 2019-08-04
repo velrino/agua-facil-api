@@ -10,6 +10,10 @@ class CompanyPlace extends Default {
     company() {
         return this.belongsTo('App/Models/Company');
     }
+
+    ordersDone() {
+        return this.hasMany('App/Models/Order', 'id', 'company_place_id');
+    }
 }
 
 module.exports = CompanyPlace

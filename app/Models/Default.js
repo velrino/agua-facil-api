@@ -52,6 +52,10 @@ class Default extends Model {
             }
         }
     }
+
+    status() {
+        return this.hasOne('App/Models/Status', 'status_id', 'id').select('id', 'text')
+    }
 }
 
 module.exports = Default

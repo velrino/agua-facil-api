@@ -1,16 +1,22 @@
 'use strict'
 
-const ENUMS = use('App/../config/enums');
+const { orderStatus } = use('App/../config/enums');
 const DefaultCommand = use('./../default');
 const OrderRepository = use('App/Infra/Repositories/Order');
 
 class IncrementOrderCommand extends DefaultCommand {
 
+    checkStatus(status_id) {
+        return Object.keys(orderStatus)
+            .filter(index => orderStatus[index].id == status_id)[0] || null;
+    }
+
     async execute({ request, response }) {
-        const status = ENUMS.orderStatus[request.params.status];
-        if (status == null)
+        const checkStatus = this.checkStatus(request.params.status);
+        if (!checkStatus)
             return response.status(400).json({ message: 'INVALID_STATUS' });
-            
+        const status = orderStatus[checkStatus];
+
         try {
             const repository = new OrderRepository();
 
@@ -22,7 +28,9 @@ class IncrementOrderCommand extends DefaultCommand {
             if (data == null)
                 return response.status(404).json({ message: 'NOT_FOUND' });
 
-            return await repository.createHistoric(request.params.id, status.id);
+            await repository.createHistoric(request.params.id, status.id);
+            await repository.updateOrderStatus(request.params.id, status.id);
+            return response.status(204);
         } catch (e) {
             console.log(e);
         }

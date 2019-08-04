@@ -31,7 +31,7 @@ class OrdersSchema extends Schema {
       table.string('date', 10).nullable()
       table.decimal('total', 10, 2).nullable()
       table.text('obs').nullable()
-      table.boolean('scheduling', 6).defaultTo(false);
+      table.boolean('scheduling').defaultTo(false);
       table.timestamps()
     })
   }

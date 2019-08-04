@@ -21,6 +21,9 @@ class CompanyPlaceRepository extends DefaultRepository {
 
     async getWhereRawJsonExtract(params = {}) {
         let startQuery = CompanyPlace.query().with('company')
+            .withCount('ordersDone as total_order_done', (builder) => {
+                builder.where('status_id', 5)
+            })
 
         const have = {
             address: params.hasOwnProperty('address'),
@@ -44,8 +47,10 @@ class CompanyPlaceRepository extends DefaultRepository {
             query = this.whereByJson(params['period'].split(","), 'period');
         if (have.address) {
             const maps = await new MapsService().getLocationByAddres(params['address']);
-            const { lat, lng } = maps.geometry.location;
-            startQuery = this.queryNearby(startQuery, lat, lng, params['distance'])
+            if(maps !== undefined) {
+                const { lat, lng } = maps.geometry.location;
+                startQuery = this.queryNearby(startQuery, lat, lng, params['distance'])
+            }
         } else if (have.location) {
             startQuery = this.queryNearby(startQuery, params['lat'], params['lng'], params['distance'])
         }

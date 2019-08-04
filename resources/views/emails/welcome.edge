@@ -1,0 +1,39 @@
+<center>
+   <h2> Olá, {{ client_name }} </h2>
+   <p>
+      Recebemos seu pedido <b> {{ id }} </b> para o dia  <b> {{ date }} </b> o valor total foi <b> {{ total }}  </b>
+   </p>
+  <a href="{{ link }}" target="_blank"> Visualize aqui </a>
+   <h3><b>Resumo</b></h3>
+   <table>
+      <tr>
+         <td align="right"><b>Quantidade de água M³:</b></td>
+         <td align="left"> {{quantity}}</td>
+      </tr>
+      <tr>
+         <td align="right"><b>Quantidade de mangueira M²:</b></td>
+         <td align="left">{{quantity}}</td>
+      </tr>
+      <tr>
+         <td align="right"><b>Telefone:</b></td>
+         <td align="left">{{phone}}</td>
+      </tr>
+      <tr>
+         <td align="right"><b>Cep:</b></td>
+         <td align="left">{{client_cep}}</td>
+      </tr>
+      </tr>
+      <tr>
+         <td align="right"><b>Endereço:</b></td>
+         <td align="left">{{client_address}}</td>
+      </tr>
+      <tr>
+         <td align="right"><b>Número:</b></td>
+         <td align="left">{{client_number}}</td>
+      </tr>
+      <tr>
+         <td align="right"><b>Observações:</b></td>
+         <td align="left">{{obs}}</td>
+      </tr>
+   </table>
+</center>

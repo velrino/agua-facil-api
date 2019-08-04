@@ -33,11 +33,17 @@ class CreateOrderCommand extends DefaultCommand {
                 return response.status(400).json(validation);
 
             const data = await new OrderRepository().create(inputs);
-
-            const mail = await new MailService().sendMail(params['client_email'], 'seu pedido está a caminho');
-            console.log(mail);
+            //const dataJson = data..toJSON()
+            let mailData = {
+                ...data.toJSON(),
+                link: 'https://aguafacil.github.io/order/'.concat(data.id)
+            }
+            await new MailService().sendMail(
+                inputs['client_email'], 
+                'Seu pedido está a caminho',
+                mailData);
             
-            return data;
+            return mailData;
         } catch (e) {
             console.log(e);
         }

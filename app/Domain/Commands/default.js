@@ -17,6 +17,13 @@ class DefaultCommand {
         const validation = await validate(request, rules);
         return (validation.fails()) ? validation.messages() : null;
     }
-    
+
+    genericQueryParams(inputs) {
+        return {
+            page: (inputs['page']) ? inputs['page'] : 1,
+            limit: (inputs['limit']) ? inputs['limit'] : 1,
+        }
+    }
+
 }
 module.exports = DefaultCommand
