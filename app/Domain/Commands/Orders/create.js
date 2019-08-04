@@ -2,33 +2,41 @@
 
 const DefaultCommand = use('./../default');
 const OrderRepository = use('App/Infra/Repositories/Order');
+const MapsService = use('App/Infra/Services/Maps');
+const MailService = use('App/Infra/Services/Mail');
 
 class CreateOrderCommand extends DefaultCommand {
 
     rules = {
-        'company_place_id': 'required|string',
-        'data': 'required',
-        'data.client': 'required',
-        'data.client.name': 'required',
-        'data.client.address': 'required',
-        'data.client.phone': 'required',
-        'data.quantity': 'required',
-        'data.meters': 'required',
-        'data.scheduling': 'required',
-        'data.date': 'required',
-        'data.obs': 'required',
+        company_place_id: 'required|string',
+        client_name: 'required',
+        client_cep: 'required',
+        client_address: 'required',
+        client_email: 'required',
+        client_state: 'required',
+        client_number: 'required',
+        client_phone: 'required',
+        quantity: 'required',
+        meters: 'required',
+        scheduling: 'required',
+        date: 'required',
+        obs: 'required',
     }
 
     async execute({ request, response }) {
-        const inputs = request.all();
-        const validation = await this.validator(inputs, this.rules);
-
-        if (validation != null)
-            return response.status(400).json(validation);
-            
         try {
+
+            const inputs = request.all();
+            const validation = await this.validator(inputs, this.rules);
+
+            if (validation != null)
+                return response.status(400).json(validation);
+
             const data = await new OrderRepository().create(inputs);
 
+            const mail = await new MailService().sendMail(params['client_email'], 'seu pedido está a caminho');
+            console.log(mail);
+            
             return data;
         } catch (e) {
             console.log(e);

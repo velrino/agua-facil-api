@@ -7,13 +7,13 @@ const MapsService = use('App/Infra/Services/Maps');
 class CreateCompanyPlaceCommand extends DefaultCommand {
 
   rules = {
-    'company_id': 'required|string',
-    'trucks': 'required|integer',
-    'price': 'required',
-    'distance': 'required',
-    'address': 'required|string',
-    'data': 'required',
-    'data.meters': 'required',
+    company_id: 'required|string',
+    trucks: 'required|integer',
+    price: 'required',
+    distance: 'required',
+    address: 'required|string',
+    data: 'required',
+    'data.meters': 'required|array',
     'data.period': 'required|array',
     'data.payment': 'required|array',
   }

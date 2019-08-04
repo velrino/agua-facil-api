@@ -22,12 +22,10 @@ class DatabaseSeeder {
       id: '3fbc4824-1f94-41e1-9c55-b20c407c394c',
       document: '123456789',
       status_id: 1,
-      data: {
-        name_fantasy: 'Lorem',
-        name_social: 'Lorem Ipsum',
-        phone: '123456789',
-        person: 'Shazam Ipsum'
-      }
+      name_fantasy: 'Lorem',
+      name_social: 'Lorem Ipsum',
+      phone: '123456789',
+      person: 'Shazam Ipsum',
     }
     ]);
 
@@ -45,7 +43,7 @@ class DatabaseSeeder {
         data: {
           payment: [1, 2, 3],
           period: [4, 5, 6],
-          meters: 3
+          meters: [3, 4]
         }
       },
       {
@@ -61,7 +59,7 @@ class DatabaseSeeder {
         data: {
           payment: [1, 2, 3],
           period: [4, 5, 6],
-          meters: 3
+          meters: [3, 5]
         }
       },
     ]);

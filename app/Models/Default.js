@@ -4,6 +4,7 @@
 const Model = use('Model')
 const uuid = require('uuid');
 const lodash = require('lodash');
+const emptyObject = '{}';
 
 class Default extends Model {
     static boot() {
@@ -20,7 +21,8 @@ class Default extends Model {
             modelInstance.id = await params.id
             await delete params.id
             params.id = await uuid.v4();
-            modelInstance.data = JSON.parse(modelInstance.data);
+            const modelData = (modelInstance.data) ? modelInstance.data : emptyObject;
+            modelInstance.data = JSON.parse(modelData);
         })
         /* Before creating or updating a new record. */
         this.addHook('beforeSave', async (modelInstance) => {

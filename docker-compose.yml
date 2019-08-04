@@ -1,13 +1,21 @@
-version: "3"
+version: '3'
 
 services:
   mysql:
-    container_name: mysql
+    restart: always
     image: mysql:5.7
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: agua-facil
+    container_name: 'mysql'
     ports:
-      - "3307:3306"
-    restart: always
+      - "3306:3306"
+    volumes:
+      - database:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: agua-facil
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'no'
+      MYSQL_RANDOM_ROOT_PASSWORD: 'no'
+      MYSQL_ROOT_PASSWORD: root
+volumes:
+  database:
+    driver: "local"

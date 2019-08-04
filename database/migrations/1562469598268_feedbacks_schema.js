@@ -20,7 +20,7 @@ class FeedbacksSchema extends Schema {
         .onDelete('CASCADE');
       table.string('type', 10).defaultTo('order');
       table.integer('rating', 1).defaultTo(1).notNullable();
-      table.json('data');
+      table.json('data').nullable();
       table.timestamps()
     })
   }

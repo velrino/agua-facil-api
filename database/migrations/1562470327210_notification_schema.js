@@ -18,7 +18,7 @@ class NotificationSchema extends Schema {
       table.boolean('visualized').defaultTo(false);
       table.boolean('send_email').defaultTo(false);
       table.boolean('send_whatsapp').defaultTo(false);
-      table.json('data');
+      table.json('data').nullable();
       table.timestamps()
     })
   }

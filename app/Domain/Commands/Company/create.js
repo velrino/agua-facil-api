@@ -7,11 +7,10 @@ class CreateCompanyCommand extends DefaultCommand {
 
   rules = {
     document: 'required|string|unique:companies,document',
-    'data': 'required',
-    'data.name_fantasy': 'required|string',
-    'data.phone': 'required|string',
-    'data.person': 'required|string',
-    'data.name_social': 'required|string',
+    name_fantasy: 'required|string',
+    phone: 'required|string',
+    person: 'required|string',
+    name_social: 'required|string',
   }
 
   async execute({ request, response }) {
