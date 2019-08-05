@@ -11,11 +11,7 @@ services:
       - database:/var/lib/mysql
     environment:
       MYSQL_DATABASE: agua-facil
-      MYSQL_USER: root
-      MYSQL_PASSWORD: root
-      MYSQL_ALLOW_EMPTY_PASSWORD: 'no'
-      MYSQL_RANDOM_ROOT_PASSWORD: 'no'
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ALLOW_EMPTY_PASSWORD: yes
 volumes:
   database:
     driver: "local"
