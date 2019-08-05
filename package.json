@@ -7,8 +7,7 @@
   "scripts": {
     "start": "node server.js",
     "test": "node ace test",
-    "db": "adonis migration:rollback && adonis migration:run && adonis seed",
-    "heroku-postbuild": "npm run db && npm run assets-production"
+    "db": "adonis migration:rollback && adonis migration:run && adonis seed"
   },
   "keywords": [
     "adonisjs",
