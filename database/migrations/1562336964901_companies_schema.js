@@ -19,6 +19,7 @@ class CompaniesSchema extends Schema {
         .onUpdate('CASCADE')
         .onDelete('CASCADE');
       table.json('data').nullable();
+      table.integer('type').notNullable().defaultTo(1);
       table.timestamps();
     })
   }
