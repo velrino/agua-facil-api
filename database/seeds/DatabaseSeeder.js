@@ -6,10 +6,14 @@ const CompanyPlace = use('App/Models/CompanyPlace')
 const Status = use('App/Models/Status')
 const OrderHistoric = use('App/Models/OrderHistoric')
 const { orderStatus } = use('./../../config/enums');
+const Env = use('Env')
 
 class DatabaseSeeder {
   async run() {
-    await Database.raw('SET FOREIGN_KEY_CHECKS = 0;');
+    const foreignKeyOff = (Env.get('DB_CONNECTION') == "mysql") ? 'SET FOREIGN_KEY_CHECKS = 0;': 'PRAGMA foreign_keys = OFF;';
+    const foreignKeyOn = (Env.get('DB_CONNECTION') == "mysql") ? 'SET FOREIGN_KEY_CHECKS = 1;': 'PRAGMA foreign_keys = ON;';
+
+    await Database.raw(foreignKeyOff);
     await OrderHistoric.truncate();
     await Status.truncate();
     await Company.truncate();
@@ -112,7 +116,7 @@ class DatabaseSeeder {
       },
     ]);
 
-    await Database.raw('SET FOREIGN_KEY_CHECKS = 1;')
+    await Database.raw(foreignKeyOn)
   }
 }
 
