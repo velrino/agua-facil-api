@@ -5,11 +5,16 @@ const CompanyRepository = use('App/Infra/Repositories/Company');
 
 class GetCompanyCommand extends DefaultCommand {
 
-  async execute({ request }) {
-    const queries = request.qs;
+  async execute({ request, response }) {
+    try {
+      const queries = request.qs;
 
-    let data = new CompanyRepository().getWhereRawJsonExtract(queries); 
-    return data
+      let data = await new CompanyRepository().getWhereRawJsonExtract(queries);
+
+      return response.status(200).json(data);
+    } catch (error) {
+      return response.status(422).json({ message: 'UNPROCESSED' });
+    }
   }
 }
 module.exports = GetCompanyCommand

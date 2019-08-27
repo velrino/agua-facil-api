@@ -5,14 +5,14 @@ const CompanyPlaceRepository = use('App/Infra/Repositories/CompanyPlace');
 
 class SearchCompanyPlaceCommand extends DefaultCommand {
 
-  async execute({ request }) {
+  async execute({ request, response }) {
     try {
       const queries = request.qs;
-      let data = new CompanyPlaceRepository().getWhereRawJsonExtract(queries);
+      let data = await new CompanyPlaceRepository().getWhereRawJsonExtract(queries);
 
-      return data
+      return response.status(200).json(data);
     } catch (e) {
-      console.log(e);
+      return response.status(422).json({ message: 'UNPROCESSED' });
     }
   }
 }

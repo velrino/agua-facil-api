@@ -22,11 +22,9 @@ class CreateCompanyCommand extends DefaultCommand {
         return response.status(400).json(validation);
 
       const data = await new CompanyRepository().store(inputs);
-      return data;
-
+      return response.status(200).json(data);
     } catch (e) {
-      console.log(e);
-
+      return response.status(422).json({ message: 'UNPROCESSED' });
     }
   }
 }

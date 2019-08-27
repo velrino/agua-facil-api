@@ -36,15 +36,15 @@ class CreateCompanyPlaceCommand extends DefaultCommand {
       const maps = await new MapsService().getLocationByAddres(inputs['address']);
 
       if (!maps)
-        return response.status(400).json({ message: 'ADDRESS_NOT_FOUD' });
+        return response.status(400).json({ message: 'ADDRESS_NOT_FOUND' });
 
       const newInputs = this.handleInputsMaps(inputs, maps);
 
       const data = await new CompanyPlaceRepository().create(newInputs);
 
-      return data;
+      return response.status(200).json(data);
     } catch (e) {
-      console.log(e);
+      return response.status(422).json({ message: 'UNPROCESSED' });
     }
   }
 }
