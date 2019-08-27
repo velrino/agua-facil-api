@@ -24,6 +24,7 @@ class CompanyPlaceSchema extends Schema {
       table.decimal('distance', 10, 8).nullable();
       table.string('latitude', 30).nullable();
       table.string('longitude', 30).nullable();
+      table.string('address', 200).nullable();
       table.json('data').nullable();
       table.timestamps()
     })

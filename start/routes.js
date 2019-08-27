@@ -24,6 +24,7 @@ Route.group(() => {
 
   Route.post('/places', 'App/Domain/Commands/CompanyPlace/create.execute')
   Route.get('/places/search', 'App/Domain/Commands/CompanyPlace/search.execute')
+  Route.put('/places/:id', 'App/Domain/Commands/CompanyPlace/update.execute')
 
   Route.get('/order/:id', 'App/Domain/Commands/Orders/get.execute')
   Route.post('/order', 'App/Domain/Commands/Orders/create.execute')

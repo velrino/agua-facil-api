@@ -52,11 +52,11 @@ class DatabaseSeeder {
         distance: 4,
         latitude: '-23.562700',
         longitude: '-46.654610',
+        address: 'Avenida Paulista 1374, 01310-100, São Paulo',
         data: {
           payment: [1, 2, 3],
           period: [4, 5, 6],
           meters: [3, 4],
-          address: 'Avenida Paulista 1374, 01310-100, São Paulo'
         }
       },
       {
@@ -69,11 +69,11 @@ class DatabaseSeeder {
         distance: 4,
         latitude: '-23.5437565',
         longitude: '-46.429703599999996',
+        address: 'Rua Santa Rita da Estrela 431, 08420-318, São Paulo',
         data: {
           payment: [1, 2, 3],
           period: [4, 5, 6],
           meters: [3, 5],
-          address: 'Rua Santa Rita da Estrela 431, 08420-318, São Paulo'
         }
       },
       {
@@ -86,11 +86,11 @@ class DatabaseSeeder {
         distance: 4,
         latitude: '-23.570921',
         longitude: '-46.649910',
+        address: 'Rua Coronel Oscar Porto, 70 - Paraíso, São Paulo - SP, 04003-000',
         data: {
           payment: [1, 2, 3],
           period: [4, 5, 6],
           meters: [3, 5],
-          address: ' Rua Coronel Oscar Porto, 70 - Paraíso, São Paulo - SP, 04003-000'
         }
       },
       {
@@ -103,11 +103,11 @@ class DatabaseSeeder {
         distance: 4,
         latitude: '-23.632670',
         longitude: '-46.703200',
+        address: 'Rua Alexandre Dumas, 2051 - Chácara Santo Antônio, São Paulo',
         data: {
           payment: [1, 2, 3],
           period: [4, 5, 6],
           meters: [3, 5],
-          address: 'Rua Alexandre Dumas, 2051 - Chácara Santo Antônio, São Paulo'
         }
       },
     ]);
