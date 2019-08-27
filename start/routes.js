@@ -20,7 +20,8 @@ Route.group(() => {
   Route.get('/companies', 'App/Domain/Commands/Company/get.execute')
   Route.get('/companies/orders/:id', 'App/Domain/Commands/Orders/getByCompany.execute')
   Route.post('/companies', 'App/Domain/Commands/Company/create.execute')
-  
+  Route.put('/companies/:id', 'App/Domain/Commands/Company/update.execute')
+
   Route.post('/places', 'App/Domain/Commands/CompanyPlace/create.execute')
   Route.get('/places/search', 'App/Domain/Commands/CompanyPlace/search.execute')
 
