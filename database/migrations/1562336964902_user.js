@@ -7,7 +7,6 @@ class UserSchema extends Schema {
   up() {
     this.create('users', (table) => {
       table.uuid('id').primary();
-      table.string('username', 80).notNullable().unique()
       table.string('email', 254).notNullable().unique()
       table.string('password', 60).notNullable()
       table.integer('status_id', 2).unsigned().notNullable().defaultTo(1);
@@ -17,6 +16,11 @@ class UserSchema extends Schema {
         .onUpdate('CASCADE')
         .onDelete('CASCADE');
       table.integer('hierarchy', 1).defaultTo(1);
+      table.uuid('company_id')
+        .references('id')
+        .inTable('companies')
+        .onUpdate('CASCADE')
+        .onDelete('CASCADE');
       table.timestamps()
     })
   }

@@ -6,6 +6,7 @@ const CompanyPlace = use('App/Models/CompanyPlace')
 const Status = use('App/Models/Status')
 const OrderHistoric = use('App/Models/OrderHistoric')
 const { orderStatus } = use('./../../config/enums');
+const User = use('App/Models/User')
 const Env = use('Env')
 
 class DatabaseSeeder {
@@ -42,7 +43,23 @@ class DatabaseSeeder {
         phone: '987654321',
         person: 'Flavio Ipsum',
       }
+    ]);
 
+    await User.createMany([
+      {
+        id: '3fbc4824-1f94-41e1-9c55-b20c407c394d',
+        email: 'e@mail.com',
+        password: '1234',
+        status_id: 1,
+        company_id: '3fbc4824-1f94-41e1-9c55-b20c407c394c',
+      },
+      {
+        id: '1fffe522-e46f-4366-9cb9-bb4807b58b58',
+        email: 'u@mail.com',
+        password: '1234',
+        status_id: 1,
+        company_id: '',
+      }
     ]);
 
     await CompanyPlace.createMany([
