@@ -16,6 +16,10 @@ class CompanyRepository extends DefaultRepository {
     return await Company.query().paginate(1, 10);
   }
 
+  async first(id) {
+    return await Company.query().where('id', id).first();
+  }
+
   async getWhereRawJsonExtract(params = {}) {
     let query = this.whereByName(params['name']);
 

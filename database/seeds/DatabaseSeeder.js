@@ -4,6 +4,7 @@ const Database = use('Database')
 const Company = use('App/Models/Company')
 const CompanyPlace = use('App/Models/CompanyPlace')
 const Status = use('App/Models/Status')
+const Order = use('App/Models/Order')
 const OrderHistoric = use('App/Models/OrderHistoric')
 const { orderStatus } = use('./../../config/enums');
 const User = use('App/Models/User')
@@ -11,8 +12,8 @@ const Env = use('Env')
 
 class DatabaseSeeder {
   async run() {
-    const foreignKeyOff = (Env.get('DB_CONNECTION') == "mysql") ? 'SET FOREIGN_KEY_CHECKS = 0;': 'PRAGMA foreign_keys = OFF;';
-    const foreignKeyOn = (Env.get('DB_CONNECTION') == "mysql") ? 'SET FOREIGN_KEY_CHECKS = 1;': 'PRAGMA foreign_keys = ON;';
+    const foreignKeyOff = (Env.get('DB_CONNECTION') == "mysql") ? 'SET FOREIGN_KEY_CHECKS = 0;' : 'PRAGMA foreign_keys = OFF;';
+    const foreignKeyOn = (Env.get('DB_CONNECTION') == "mysql") ? 'SET FOREIGN_KEY_CHECKS = 1;' : 'PRAGMA foreign_keys = ON;';
 
     await Database.raw(foreignKeyOff);
     await OrderHistoric.truncate();

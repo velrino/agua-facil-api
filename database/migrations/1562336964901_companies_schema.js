@@ -21,6 +21,7 @@ class CompaniesSchema extends Schema {
         .onDelete('CASCADE');
       table.json('data').nullable();
       table.integer('type').notNullable().defaultTo(1);
+      table.boolean('user').notNullable().defaultTo(false)
       table.timestamps();
     })
   }

@@ -21,6 +21,7 @@ class UserSchema extends Schema {
         .inTable('companies')
         .onUpdate('CASCADE')
         .onDelete('CASCADE');
+      table.json('data').nullable();
       table.timestamps()
     })
   }
