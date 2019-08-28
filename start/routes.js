@@ -17,6 +17,8 @@
 const Route = use('Route')
 
 Route.group(() => {
+  Route.post('/auth/login', 'App/Domain/Commands/Auth/login.execute')
+
   Route.get('/companies', 'App/Domain/Commands/Company/get.execute')
   Route.get('/companies/orders/:id', 'App/Domain/Commands/Orders/getByCompany.execute')
   Route.post('/companies', 'App/Domain/Commands/Company/create.execute')
