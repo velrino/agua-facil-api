@@ -26,6 +26,7 @@ class DatabaseSeeder {
     await Company.createMany([
       {
         id: '3fbc4824-1f94-41e1-9c55-b20c407c394c',
+        email: 'velrino@gmail.com',
         document: '123456789',
         status_id: 1,
         type: 99,
@@ -36,6 +37,7 @@ class DatabaseSeeder {
       },
       {
         id: '84ca67e2-71f3-4af2-8525-8b8f12275ca0',
+        email: 'lorem@mail.com',
         document: '987654321',
         status_id: 1,
         name_fantasy: 'Lorem',

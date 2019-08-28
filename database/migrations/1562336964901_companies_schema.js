@@ -7,6 +7,7 @@ class CompaniesSchema extends Schema {
   up() {
     this.create('companies', (table) => {
       table.uuid('id').primary();
+      table.string('email', 254).notNullable().unique()
       table.string('document', 20).unique().notNullable();
       table.string('name_fantasy', 100).notNullable();
       table.string('phone', 20).notNullable();
