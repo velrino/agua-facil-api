@@ -6,50 +6,59 @@ const CompanyPlace = use('App/Models/CompanyPlace');
 const OrderHistoric = use('App/Models/OrderHistoric');
 
 class OrderRepository extends DefaultRepository {
-    async create(params) {
-        const order = await Order.create(params);
-        await OrderHistoric.create({ order_id: order.id, data: {} });
-        return order;
-    }
+  async create(params) {
+    const order = await Order.create(params);
+    await OrderHistoric.create({ order_id: order.id, data: {} });
+    return order;
+  }
 
-    async get(id) {
-        return await Order.query().where('id', id)
-            .with('status')
-            .with('companyPlace')
-            .with('historic', (query) => {
-                query.with('status');
-            })
-            .first();
-    }
+  async list(companyId) {
+    return await Order.query()
+      .leftJoin('companies_places', 'orders.company_place_id', 'companies_places.id')
+      .with('status')
+      .where('companies_places.company_id', companyId)
+      .orderBy('orders.created_at', 'ASC')
+      .fetch()
+  }
 
-    async getLastHistoric(id) {
-        return await OrderHistoric.query().where('order_id', id).last();
-    }
+  async get(id) {
+    return await Order.query().where('id', id)
+      .with('status')
+      .with('companyPlace')
+      .with('historic', (query) => {
+        query.with('status');
+      })
+      .first();
+  }
 
-    async checkHistoric(id, status) {
-        return await OrderHistoric.query().where('order_id', id).where('status_id', status).first();
-    }
+  async getLastHistoric(id) {
+    return await OrderHistoric.query().where('order_id', id).last();
+  }
 
-    async createHistoric(order_id, status_id) {
-        return await OrderHistoric.create({ order_id, status_id, data: {} });
-    }
+  async checkHistoric(id, status) {
+    return await OrderHistoric.query().where('order_id', id).where('status_id', status).first();
+  }
 
-    async getCompany(id, params) {
-        const companyPlaces = await CompanyPlace.query().select('id').where('company_id', id).pluck('id');
+  async createHistoric(order_id, status_id) {
+    return await OrderHistoric.create({ order_id, status_id, data: {} });
+  }
 
-        return await Order.query()
-            .whereIn('company_place_id', companyPlaces)
-            .with('status')
-            .with('companyPlace')
-            .paginate(params.page, params.limit);
-    }
+  async getCompany(id, params) {
+    const companyPlaces = await CompanyPlace.query().select('id').where('company_id', id).pluck('id');
 
-    async updateOrderStatus(id, status_id) {
-        return await Order
-            .query()
-            .where('id', id)
-            .update({ status_id })
-    }
+    return await Order.query()
+      .whereIn('company_place_id', companyPlaces)
+      .with('status')
+      .with('companyPlace')
+      .paginate(params.page, params.limit);
+  }
+
+  async updateOrderStatus(id, status_id) {
+    return await Order
+      .query()
+      .where('id', id)
+      .update({ status_id })
+  }
 }
 
 module.exports = OrderRepository
