@@ -5,20 +5,9 @@ const CompanyPlaceRepository = use('App/Infra/Repositories/CompanyPlace');
 
 class SearchCompanyPlaceCommand extends DefaultCommand {
 
-  async execute({ request, auth, response }) {
-    let user = null
+  async execute({ request, response }) {
     try {
-      user = await auth.getUser()
-    } catch (error) {
-      response.send(error.message)
-    }
-    let queries = request.qs;
-    if(user != null) {
-      const { company_id } = user;
-      queries = {...queries, company_id}
-    }
-
-    try {
+      const queries = request.qs;
       let data = await new CompanyPlaceRepository().getWhereRawJsonExtract(queries);
 
       return response.status(200).json(data);

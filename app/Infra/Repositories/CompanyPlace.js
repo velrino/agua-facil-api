@@ -37,6 +37,7 @@ class CompanyPlaceRepository extends DefaultRepository {
       page: params.hasOwnProperty('page'),
       payment: params.hasOwnProperty('payment'),
       period: params.hasOwnProperty('period'),
+      company_id: params.hasOwnProperty('company_id'),
     }
 
     if (have.order) {
@@ -45,6 +46,8 @@ class CompanyPlaceRepository extends DefaultRepository {
     }
 
     let query = [];
+    if (have.company_id)
+      query = startQuery.where('company_id', params['company_id']);
     if (have.payment)
       query = this.whereByJson(params['payment'].split(","), 'payment');
     if (have.period)
