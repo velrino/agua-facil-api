@@ -17,21 +17,22 @@
 const Route = use('Route')
 
 Route.group(() => {
-  Route.post('/auth/login', 'App/Domain/Commands/Auth/login.execute')
+    Route.post('/auth/login', 'App/Domain/Commands/Auth/login.execute')
 
-  Route.get('/companies', 'App/Domain/Commands/Company/get.execute')
-  Route.get('/companies/orders/:id', 'App/Domain/Commands/Orders/getByCompany.execute')
-  Route.post('/companies', 'App/Domain/Commands/Company/create.execute')
-  Route.put('/companies/:id', 'App/Domain/Commands/Company/update.execute')
+    Route.get('/companies', 'App/Domain/Commands/Company/get.execute')
+    Route.get('/companies/orders/:id', 'App/Domain/Commands/Orders/getByCompany.execute')
+    Route.post('/companies', 'App/Domain/Commands/Company/create.execute')
+    Route.put('/companies/:id', 'App/Domain/Commands/Company/update.execute')
 
-  Route.post('/feedback', 'App/Domain/Commands/Feedback/create.execute')
+    Route.post('/feedback', 'App/Domain/Commands/Feedback/create.execute')
 
-  Route.post('/places', 'App/Domain/Commands/CompanyPlace/create.execute')
-  Route.get('/places/search', 'App/Domain/Commands/CompanyPlace/search.execute')
-  Route.put('/places/:id', 'App/Domain/Commands/CompanyPlace/update.execute')
+    Route.post('/places', 'App/Domain/Commands/CompanyPlace/create.execute')
+    Route.get('/places/search', 'App/Domain/Commands/CompanyPlace/search.execute')
+    Route.get('/places/:id', 'App/Domain/Commands/CompanyPlace/get.execute')
+    Route.put('/places/:id', 'App/Domain/Commands/CompanyPlace/update.execute')
 
-  Route.get('/orders', 'App/Domain/Commands/Orders/list.execute')
-  Route.get('/order/:id', 'App/Domain/Commands/Orders/get.execute')
-  Route.post('/order', 'App/Domain/Commands/Orders/create.execute')
-  Route.patch('/order/:id/:status', 'App/Domain/Commands/Orders/increment.execute')
+    Route.get('/orders', 'App/Domain/Commands/Orders/list.execute')
+    Route.get('/order/:id', 'App/Domain/Commands/Orders/get.execute')
+    Route.post('/order', 'App/Domain/Commands/Orders/create.execute')
+    Route.patch('/order/:id/:status', 'App/Domain/Commands/Orders/increment.execute')
 }).prefix('api')
