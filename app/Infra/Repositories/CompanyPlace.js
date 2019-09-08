@@ -44,6 +44,8 @@ class CompanyPlaceRepository extends DefaultRepository {
             company_id: params.hasOwnProperty('company_id'),
         }
 
+        startQuery.where('status_id', 1);
+
         if (have.order) {
             const order = params['order'].split(",");
             startQuery.orderBy(order[0], order[1]);
