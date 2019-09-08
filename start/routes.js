@@ -23,6 +23,7 @@ Route.group(() => {
     Route.get('/companies/orders/:id', 'App/Domain/Commands/Orders/getByCompany.execute')
     Route.post('/companies', 'App/Domain/Commands/Company/create.execute')
     Route.put('/companies/:id', 'App/Domain/Commands/Company/update.execute')
+    Route.patch('/companies/:id/:status', 'App/Domain/Commands/Company/status.execute')
 
     Route.post('/feedback', 'App/Domain/Commands/Feedback/create.execute')
 

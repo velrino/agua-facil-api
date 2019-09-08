@@ -13,6 +13,10 @@ class CompanyPlaceRepository extends DefaultRepository {
         return await CompanyPlace.query().where('id', id).whereNotIn('status_id', [99]).update(params);
     }
 
+    async updateByCompany(id, params) {
+        return await CompanyPlace.query().where('company_id', id).update(params);
+    }
+
     async get() {
         return await CompanyPlace.query().paginate(1, 10);
     }
