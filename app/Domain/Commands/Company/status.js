@@ -33,7 +33,7 @@ class DeleteCompanyCommand extends DefaultCommand {
             }
         }
 
-        return options[status];
+        return options[status.toLowerCase()];
     }
 
     async execute({ request, response }) {
