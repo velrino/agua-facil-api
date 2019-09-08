@@ -23,7 +23,7 @@ class DeleteCompanyCommand extends DefaultCommand {
         const options = {
             'active': {
                 message: 'ACTIVED',
-                status_id: 1,
+                status_id: 98,
                 emailSubject: '[Água Fácil] Sua conta foi ativada'
             },
             'delete': {

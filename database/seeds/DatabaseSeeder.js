@@ -64,7 +64,7 @@ class DatabaseSeeder {
             {
                 id: '1fffe522-e46f-4366-9cb9-bb4807b58b59',
                 company_id: '3fbc4824-1f94-41e1-9c55-b20c407c394c',
-                email: 'velrino@gmail.com',
+                email: 'v@gmail.com',
                 password: '1234',
                 status_id: 1,
             },
