@@ -35,6 +35,10 @@ const ENUMS = {
             text: 'Pendente',
             id: 1,
         },
+        deleted: {
+            text: 'Deletado',
+            id: 99,
+        },
     },
 }
 

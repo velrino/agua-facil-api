@@ -29,24 +29,24 @@ class UpdateCompanyPlaceCommand extends DefaultCommand {
         if (validation != null)
             return response.status(400).json(validation);
 
-        //try {
-        if (inputs['address']) {
-            const maps = await new MapsService().getLocationByAddres(inputs['address']);
+        try {
+            if (inputs['address']) {
+                const maps = await new MapsService().getLocationByAddres(inputs['address']);
 
-            if (!maps)
-                return response.status(400).json({ message: 'ADDRESS_NOT_FOUND' });
+                if (!maps)
+                    return response.status(400).json({ message: 'ADDRESS_NOT_FOUND' });
 
-            inputs = this.handleInputsMaps(inputs, maps);
+                inputs = this.handleInputsMaps(inputs, maps);
+            }
+
+            const data = await new CompanyPlaceRepository().update(request.params.id, inputs);
+            if (!data)
+                return response.status(400).json({ message: 'NOT_UPDATED' });
+
+            return response.status(200).json({ message: 'UPDATED' });
+        } catch (e) {
+            return response.status(422).json({ message: 'UNPROCESSED' });
         }
-
-        const data = await new CompanyPlaceRepository().update(request.params.id, inputs);
-        if (!data)
-            return response.status(400).json({ message: 'NOT_UPDATED' });
-
-        return response.status(200).json({ message: 'UPDATED' });
-        // } catch (e) {
-        //     return response.status(422).json({ message: 'UNPROCESSED' });
-        // }
     }
 }
 module.exports = UpdateCompanyPlaceCommand

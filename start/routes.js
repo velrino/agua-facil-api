@@ -30,6 +30,7 @@ Route.group(() => {
     Route.get('/places/search', 'App/Domain/Commands/CompanyPlace/search.execute')
     Route.get('/places/:id', 'App/Domain/Commands/CompanyPlace/get.execute')
     Route.put('/places/:id', 'App/Domain/Commands/CompanyPlace/update.execute')
+    Route.delete('/places/:id', 'App/Domain/Commands/CompanyPlace/delete.execute')
 
     Route.get('/orders', 'App/Domain/Commands/Orders/list.execute')
     Route.get('/order/:id', 'App/Domain/Commands/Orders/get.execute')

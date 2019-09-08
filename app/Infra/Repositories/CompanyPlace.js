@@ -10,7 +10,7 @@ class CompanyPlaceRepository extends DefaultRepository {
     }
 
     async update(id, params) {
-        return await CompanyPlace.query().where('id', id).update(params);
+        return await CompanyPlace.query().where('id', id).whereNotIn('status_id', [99]).update(params);
     }
 
     async get() {
@@ -18,7 +18,7 @@ class CompanyPlaceRepository extends DefaultRepository {
     }
 
     async first(id) {
-        return await CompanyPlace.query().where('id', id).first();
+        return await CompanyPlace.query().where('id', id).whereNotIn('status_id', [99]).first();
     }
 
     queryNearby(startQuery, lat, lng, distance = 1) {
@@ -44,7 +44,7 @@ class CompanyPlaceRepository extends DefaultRepository {
             company_id: params.hasOwnProperty('company_id'),
         }
 
-        startQuery.where('status_id', 1);
+        startQuery.whereNotIn('status_id', [99]);
 
         if (have.order) {
             const order = params['order'].split(",");
