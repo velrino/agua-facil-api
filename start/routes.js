@@ -16,6 +16,10 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 
+Route.get('/', () => {
+    return { 'api': 'aguafacil' };
+})
+
 Route.group(() => {
     Route.post('/auth/login', 'App/Domain/Commands/Auth/login.execute')
 
