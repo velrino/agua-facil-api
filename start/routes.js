@@ -17,7 +17,7 @@
 const Route = use('Route')
 
 Route.get('/', () => {
-    return { 'api': 'aguafacil' };
+    return { 'api': 'morenapi' };
 })
 
 Route.group(() => {

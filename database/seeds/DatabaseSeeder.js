@@ -30,10 +30,10 @@ class DatabaseSeeder {
                 document: '123456789',
                 status_id: 1,
                 type: 99,
-                name_fantasy: 'Agua Facil',
-                name_social: 'Agua Facil',
+                name_fantasy: 'Morena',
+                name_social: 'Morena',
                 phone: '123456789',
-                person: 'Vinicius',
+                person: 'Velrno',
             },
             {
                 id: '84ca67e2-71f3-4af2-8525-8b8f12275ca0',
